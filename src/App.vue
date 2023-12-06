@@ -4,7 +4,7 @@
       <el-aside class="aside">
         <div class="head">
           <div>
-            <img src="//s.weituibao.com/1582958061265/mlogo.png" alt="logo">
+            <img src="//s.weituibao.com/1582958061265/mlogo.png" alt="logo" />
             <span>vue3 admin</span>
           </div>
         </div>
@@ -30,6 +30,22 @@
               </el-menu-item>
             </el-menu-item-group>
           </el-sub-menu>
+          <el-sub-menu index="2">
+            <template #title>
+              <span>首页配置</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/swiper">
+                <el-icon>
+                  <Picture />
+                </el-icon>
+                轮播图配置
+              </el-menu-item>
+              <el-menu-item index="/hot"><el-icon><StarFilled /></el-icon>热销商品配置</el-menu-item>
+              <el-menu-item index="/new"><el-icon><Sell /></el-icon>新品上线配置</el-menu-item>
+              <el-menu-item index="/recommend"><el-icon><ShoppingCart /></el-icon>为你推荐配置</el-menu-item>
+            </el-menu-item-group>
+          </el-sub-menu>
         </el-menu>
       </el-aside>
       <el-container class="content">
@@ -47,31 +63,34 @@
 </template>
 
 <script setup>
-import { reactive, toRefs } from 'vue'
-import { useRouter } from 'vue-router'
-import { localGet, pathMap } from '@/utils'
-import Header from '@/components/Header.vue'
-import Footer from '@/components/Footer.vue'
+import { reactive, toRefs } from "vue";
+import { useRouter } from "vue-router";
+import { localGet, pathMap } from "@/utils";
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
 
 // route doesn't need left menu
-const noMenu = ['/login']
-const router = useRouter()
+const noMenu = ["/login"];
+const router = useRouter();
 const state = reactive({
   showMenu: true,
-})
- router.beforeEach((to, from, next) => {
-  if (to.path == '/login') {
-    next()
+  defaultOpen: ["1", "2"],
+  currentPath: "/",
+});
+router.beforeEach((to, from, next) => {
+  if (to.path == "/login") {
+    next();
   } else {
-    if (!localGet('token')) {
-      next({ path: '/login' })
+    if (!localGet("token")) {
+      next({ path: "/login" });
     } else {
-      next()
+      next();
     }
   }
-  state.showMenu = !noMenu.includes(to.path)
-  document.title = pathMap[to.name]
-})
+  state.showMenu = !noMenu.includes(to.path);
+  state.currentPath = to.path
+  document.title = pathMap[to.name];
+});
 </script>
 
 <style scoped>
@@ -83,7 +102,7 @@ const state = reactive({
   height: 100vh;
 }
 .aside {
-  width: 200px!important;
+  width: 200px !important;
   background-color: #222832;
 }
 .head {
@@ -107,8 +126,8 @@ const state = reactive({
   color: #ffffff;
 }
 .line {
-  border-top: 1px solid hsla(0,0%,100%,.05);
-  border-bottom: 1px solid rgba(0,0,0,.2);
+  border-top: 1px solid hsla(0, 0%, 100%, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 .content {
   display: flex;
