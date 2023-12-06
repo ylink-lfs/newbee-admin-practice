@@ -1,21 +1,27 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import Index from '@/views/Index.vue'
-import AddGood from '@/views/AddGood.vue'
+import { createRouter, createWebHashHistory } from "vue-router";
+import Index from "@/views/Index.vue";
+import AddGood from "@/views/AddGood.vue";
+import Login from "@/views/Login.vue";
 
 const router = createRouter({
-  history: createWebHashHistory(), // hash 模式
+  history: createWebHashHistory(),
   routes: [
     {
-      path: '/',
-      name: 'index',
-      component: Index
+      path: "/",
+      name: "index",
+      component: Index,
     },
     {
-      path: '/add',
-      name: 'add',
-      component: AddGood
-    }
-  ]
-})
+      path: "/add",
+      name: "add",
+      component: AddGood,
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
+    },
+  ],
+});
 
-export default router
+export default router;

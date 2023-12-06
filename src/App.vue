@@ -1,23 +1,20 @@
 <template>
   <div class="layout">
-    <el-container class="container">
+    <el-container v-if="state.showMenu" class="container">
       <el-aside class="aside">
-        <!--系统名称+logo-->
         <div class="head">
           <div>
             <img src="//s.weituibao.com/1582958061265/mlogo.png" alt="logo">
             <span>vue3 admin</span>
           </div>
         </div>
-        <!--一条为了美观的线条-->
+        <!--line for good looking-->
         <div class="line" />
         <el-menu background-color="#222832" text-color="#fff" :router="true">
-          <!--一级栏目-->
           <el-sub-menu index="1">
             <template #title>
               <span>Dashboard</span>
             </template>
-            <!--二级栏目-->
             <el-menu-item-group>
               <el-menu-item index="/">
                 <el-icon>
@@ -43,19 +40,38 @@
         <Footer />
       </el-container>
     </el-container>
+    <el-container v-else class="container">
+      <router-view />
+    </el-container>
   </div>
 </template>
 
-<script>
-  import Header from '@/components/Header.vue'
-  import Footer from '@/components/Footer.vue'
-  export default {
-    name: 'App',
-    components: {
-      Header,
-      Footer
-    },
+<script setup>
+import { reactive, toRefs } from 'vue'
+import { useRouter } from 'vue-router'
+import { localGet, pathMap } from '@/utils'
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
+
+// route doesn't need left menu
+const noMenu = ['/login']
+const router = useRouter()
+const state = reactive({
+  showMenu: true,
+})
+ router.beforeEach((to, from, next) => {
+  if (to.path == '/login') {
+    next()
+  } else {
+    if (!localGet('token')) {
+      next({ path: '/login' })
+    } else {
+      next()
+    }
   }
+  state.showMenu = !noMenu.includes(to.path)
+  document.title = pathMap[to.name]
+})
 </script>
 
 <style scoped>
