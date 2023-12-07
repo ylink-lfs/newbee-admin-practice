@@ -41,9 +41,28 @@
                 </el-icon>
                 轮播图配置
               </el-menu-item>
-              <el-menu-item index="/hot"><el-icon><StarFilled /></el-icon>热销商品配置</el-menu-item>
-              <el-menu-item index="/new"><el-icon><Sell /></el-icon>新品上线配置</el-menu-item>
-              <el-menu-item index="/recommend"><el-icon><ShoppingCart /></el-icon>为你推荐配置</el-menu-item>
+              <el-menu-item index="/hot"
+                ><el-icon><StarFilled /></el-icon>热销商品配置</el-menu-item
+              >
+              <el-menu-item index="/new"
+                ><el-icon><Sell /></el-icon>新品上线配置</el-menu-item
+              >
+              <el-menu-item index="/recommend"
+                ><el-icon><ShoppingCart /></el-icon>为你推荐配置</el-menu-item
+              >
+            </el-menu-item-group>
+          </el-sub-menu>
+          <el-sub-menu index="3">
+            <template #title>
+              <span>模块管理</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/category"
+                ><el-icon><Menu /></el-icon>分类管理</el-menu-item
+              >
+              <el-menu-item index="/good"
+                ><el-icon><Goods /></el-icon>商品管理</el-menu-item
+              >
             </el-menu-item-group>
           </el-sub-menu>
         </el-menu>
@@ -74,7 +93,7 @@ const noMenu = ["/login"];
 const router = useRouter();
 const state = reactive({
   showMenu: true,
-  defaultOpen: ["1", "2"],
+  defaultOpen: ["1", "2", "3"],
   currentPath: "/",
 });
 router.beforeEach((to, from, next) => {
@@ -88,7 +107,7 @@ router.beforeEach((to, from, next) => {
     }
   }
   state.showMenu = !noMenu.includes(to.path);
-  state.currentPath = to.path
+  state.currentPath = to.path;
   document.title = pathMap[to.name];
 });
 </script>
