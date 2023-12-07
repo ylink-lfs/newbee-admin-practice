@@ -24,11 +24,13 @@
       </div>
     </template>
     <el-table
-      :load="state.loading"
+      :loading="state.loading"
       :data="state.tableData"
       tooltip-effect="dark"
       style="width: 100%"
+      @selection-change="handleSelectionChange"
     >
+      <el-table-column type="selection" width="55"> </el-table-column>
       <el-table-column prop="configName" label="商品名称"> </el-table-column>
       <el-table-column label="跳转链接">
         <template #default="scope">
@@ -76,8 +78,8 @@
   <DialogAddGood
     ref="addGood"
     :reload="getIndexConfig"
-    :type="type"
-    :configType="configType"
+    :type="state.type"
+    :configType="state.configType"
   />
 </template>
 
@@ -94,6 +96,7 @@ const configTypeMap = {
   recommend: 5,
 };
 
+const addGood = ref(null)
 const router = useRouter();
 const route = useRoute();
 const state = reactive({
@@ -106,7 +109,6 @@ const state = reactive({
   configType: 3, // 3-(首页)热销商品 4-(首页)新品上线 5-(首页)为你推荐
   multipleSelection: [],
 });
-
 // 添加商品
 const handleAdd = () => {
   state.type = "add";

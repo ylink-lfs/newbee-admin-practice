@@ -29,7 +29,7 @@
             :src="state.ruleForm.url"
             class="avatar"
           />
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          <el-icon v-else><Upload /></el-icon>
         </el-upload>
       </el-form-item>
       <el-form-item label="跳转链接" prop="link">
@@ -71,8 +71,8 @@ const state = reactive({
     sort: "",
   },
   rules: {
-    url: [{ required: "true", message: "图片不能为空", trigger: ["change"] }],
-    sort: [{ required: "true", message: "排序不能为空", trigger: ["change"] }],
+    url: [{ required: true, message: "图片不能为空", trigger: ["change"] }],
+    sort: [{ required: true, message: "排序不能为空", trigger: ["change"] }],
   },
   id: "",
 });

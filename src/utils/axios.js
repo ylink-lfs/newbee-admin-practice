@@ -5,10 +5,10 @@ import { ElMessage } from "element-plus";
 import { localGet } from "./index";
 
 axios.defaults.baseURL = config[import.meta.env.MODE].baseUrl;
-axios.defaults.withCredentials = true;
-axios.defaults.headers["X-Requested-With"] = "XMLHttpRequest";
 axios.defaults.headers["token"] = localGet("token") || "";
+axios.defaults.headers["X-Requested-With"] = "XMLHttpRequest";
 axios.defaults.headers.post["Content-Type"] = "application/json";
+axios.defaults.withCredentials = true;
 
 axios.interceptors.response.use((res) => {
   if (typeof res.data !== "object") {

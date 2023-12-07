@@ -22,7 +22,7 @@
       </el-popconfirm>
     </div>
     <el-table
-      :load="state.loading"
+      :loading="state.loading"
       ref="multipleTable"
       :data="state.tableData"
       tooltip-effect="dark"
@@ -60,7 +60,7 @@
       @current-change="changePage"
     />
   </el-card>
-  <DialogAddSwiper ref="addSwiper" :reload="getCarousels" :type="type" />
+  <DialogAddSwiper ref="addSwiper" :reload="getCarousels" :type="state.type" />
 </template>
 
 <script setup>

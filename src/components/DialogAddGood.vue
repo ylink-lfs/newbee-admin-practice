@@ -54,9 +54,9 @@ const state = reactive({
     sort: "",
   },
   rules: {
-    name: [{ required: "true", message: "名称不能为空", trigger: ["change"] }],
-    id: [{ required: "true", message: "编号不能为空", trigger: ["change"] }],
-    sort: [{ required: "true", message: "排序不能为空", trigger: ["change"] }],
+    name: [{ required: true, message: "名称不能为空", trigger: ["change"] }],
+    id: [{ required: true, message: "编号不能为空", trigger: ["change"] }],
+    sort: [{ required: true, message: "排序不能为空", trigger: ["change"] }],
   },
   id: "",
 });
